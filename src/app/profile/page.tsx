@@ -7,13 +7,7 @@ import { redirect } from "next/navigation";
 export default async function ProfilePage() {
   const session = await auth();
   if (!session) {
-    return (
-      <div className="max-w-xl mx-auto shadow rounded-xl">
-        <p className="text-2xl font-medium p-4 text-red-500 text-center">
-          Session not found
-        </p>
-      </div>
-    );
+    redirect("/login");
   }
   const { user } = session;
 
