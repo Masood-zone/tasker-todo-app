@@ -29,8 +29,6 @@ import {
 } from "@/app/actions/actions";
 
 export default function TaskItem({ todo }: { todo: Todo }) {
-  console.log(todo);
-
   const [state, updateTodoAction, isUpdating] = useActionState(updateTodo, {
     success: false,
     message: "",
