@@ -6,6 +6,15 @@ import Image from "next/image";
 import Link from "next/link";
 import UserAvatar from "./user-avatar";
 import { DarkThemeToggle } from "../themes/toggle";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "../ui/dropdown-menu";
+import { MenuIcon } from "lucide-react";
 
 export default async function Navbar() {
   const session = await auth();
@@ -28,12 +37,31 @@ export default async function Navbar() {
               "use server";
               await signIn();
             }}
-            className="space-x-3"
+            className="md:space-x-3"
           >
-            <Button type="submit" variant="outline">
-              Login
-            </Button>
-            <Button type="submit">Create Account</Button>
+            <div className="md:block hidden">
+              <Button type="submit" variant="outline">
+                Login
+              </Button>
+              <Button type="submit">Create Account</Button>
+            </div>
+            <DropdownMenu>
+              <DropdownMenuTrigger className="md:hidden block">
+                <MenuIcon size={24} />
+              </DropdownMenuTrigger>
+              <DropdownMenuContent>
+                <DropdownMenuLabel>Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem>
+                  <Button type="submit" variant="outline" className="w-full">
+                    Login
+                  </Button>
+                </DropdownMenuItem>
+                <DropdownMenuItem>
+                  <Button type="submit">Create Account</Button>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
           </form>
         ) : (
           <UserAvatar
