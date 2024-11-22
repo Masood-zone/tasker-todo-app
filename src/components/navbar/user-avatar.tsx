@@ -27,8 +27,10 @@ export default function UserAvatar({ user }: { user: User }) {
     <div className="flex items-center space-x-2">
       {/* User Info */}
       <div className="flex flex-col items-end space-y-1">
-        <span className="text-sm">{name || email}</span>
-        <span className="text-xs text-gray-500">{email}</span>
+        <span className="text-sm max-[399px]:hidden">{name || email}</span>
+        <span className="text-xs text-gray-500 max-[399px]:hidden">
+          {email}
+        </span>
       </div>
 
       <DropdownMenu>

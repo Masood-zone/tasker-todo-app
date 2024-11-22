@@ -20,12 +20,17 @@ export default async function Navbar() {
   const session = await auth();
 
   return (
-    <header className="flex items-center justify-between w-full py-5 px-5">
+    <header className="flex items-center flex-row justify-between w-full py-5 px-5 ">
       {/* Header */}
-      <Link href="/" className="flex space-x-4">
+      <Link
+        href="/"
+        className="flex space-x-4 max-[449px]:flex-col flex-row items-center gap-2 max-[449px]:items-start"
+      >
         <div className="flex items-center space-x-2 hover:cursor-pointer">
           <Image src={Logo} alt="main-logo" className="w-5 h-5" />
-          <h1 className="text-xl font-medium">Tasker Todo</h1>
+          <h1 className="text-xl max-[499px]:text-base font-medium">
+            Tasker Todo
+          </h1>
         </div>
         <DarkThemeToggle />
       </Link>

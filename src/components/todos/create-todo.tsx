@@ -76,7 +76,7 @@ export const CreateTodo = () => {
         <DialogTrigger className="w-full mt-5 rounded-full text-white bg-primary py-3 dark:text-black dark:bg-white">
           Add Task
         </DialogTrigger>
-        <DialogContent className="rounded-xl max-w-xl max-sm:w-96 mx-auto">
+        <DialogContent className="rounded-xl max-w-xl max-sm:w-96 max-[420px]:w-80 max-[340px]:w-72 mx-auto">
           <DialogHeader>
             <DialogTitle>Add Todo</DialogTitle>
             <DialogDescription>Create a new task</DialogDescription>
