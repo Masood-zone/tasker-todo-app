@@ -53,12 +53,28 @@ export default async function Navbar() {
                 <DropdownMenuLabel>Account</DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem>
-                  <Button type="submit" variant="outline" className="w-full">
+                  <Button
+                    type="submit"
+                    variant="outline"
+                    className="w-full"
+                    onClick={async () => {
+                      "use server";
+                      await signIn();
+                    }}
+                  >
                     Login
                   </Button>
                 </DropdownMenuItem>
                 <DropdownMenuItem>
-                  <Button type="submit">Create Account</Button>
+                  <Button
+                    type="submit"
+                    onClick={async () => {
+                      "use server";
+                      await signIn();
+                    }}
+                  >
+                    Create Account
+                  </Button>
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
