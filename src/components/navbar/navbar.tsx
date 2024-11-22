@@ -32,15 +32,16 @@ export default async function Navbar() {
       {/* Profile */}
       <div className="">
         {!session?.user ? (
-          <form
-            action={async () => {
-              "use server";
-              await signIn();
-            }}
-            className="md:space-x-3"
-          >
+          <div className="md:space-x-3">
             <div className="md:block hidden space-x-3">
-              <Button type="submit" variant="outline">
+              <Button
+                type="submit"
+                variant="outline"
+                onClick={async () => {
+                  "use server";
+                  await signIn();
+                }}
+              >
                 Login
               </Button>
               <Button type="submit">Create Account</Button>
@@ -78,7 +79,7 @@ export default async function Navbar() {
                 </DropdownMenuItem>
               </DropdownMenuContent>
             </DropdownMenu>
-          </form>
+          </div>
         ) : (
           <UserAvatar
             user={{
