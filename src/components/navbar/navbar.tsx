@@ -39,7 +39,7 @@ export default async function Navbar() {
             }}
             className="md:space-x-3"
           >
-            <div className="md:block hidden">
+            <div className="md:block hidden space-x-3">
               <Button type="submit" variant="outline">
                 Login
               </Button>

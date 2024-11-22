@@ -13,7 +13,6 @@ import { toast } from "@/hooks/use-toast";
 import { Textarea } from "../ui/textarea";
 import {
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogHeader,
@@ -61,11 +60,21 @@ export const CreateTodo = () => {
     }
   }, [state.success, state.message]);
 
+  if (!session?.data?.user?.email) {
+    return (
+      <div className="max-w-lg mx-auto text-center p-5 space-y-2">
+        <span className="text-lg">
+          Create an account or login to start adding tasks
+        </span>
+      </div>
+    );
+  }
+
   return (
     <>
       <Dialog>
         <DialogTrigger className="w-full mt-5 rounded-full text-white bg-primary py-3 dark:text-black dark:bg-white">
-          {session?.data?.user?.email ? "Add Task" : "Get your day started!"}
+          Add Task
         </DialogTrigger>
         <DialogContent className="rounded-xl max-w-xl max-sm:w-96 mx-auto">
           <DialogHeader>
@@ -120,19 +129,17 @@ export const CreateTodo = () => {
                 </SelectContent>
               </Select>
             </div>
-            <DialogClose asChild>
-              <Button
-                type="submit"
-                className="w-full mt-5 rounded-full"
-                disabled={isPending}
-              >
-                {isPending ? (
-                  <Loader2 className="animate-spin" size={20} />
-                ) : (
-                  "Add Task"
-                )}
-              </Button>
-            </DialogClose>
+            <Button
+              type="submit"
+              className="w-full mt-5 rounded-full"
+              disabled={isPending}
+            >
+              {isPending ? (
+                <Loader2 className="animate-spin" size={20} />
+              ) : (
+                "Add Task"
+              )}
+            </Button>
             {!state.success && (
               <p className="text-sm text-center text-red-500 mt-2">
                 {state.message}
