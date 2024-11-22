@@ -20,6 +20,7 @@ export async function addTodo(prevState: unknown, data: FormData) {
     const task = data.get("task");
     const description = data.get("description");
     const priority = data.get("priority");
+    const createdAt = new Date().getTime();
 
     // Get the current user's ID
     const session = await auth();
@@ -39,8 +40,10 @@ export async function addTodo(prevState: unknown, data: FormData) {
       description,
       priority,
       completed: false,
+      createdAt,
       userId,
     });
+
     revalidatePath("/");
 
     // Return success state
@@ -75,6 +78,7 @@ export async function fetchTodos() {
       description: doc.data().description,
       priority: doc.data().priority,
       completed: doc.data().completed,
+      createdAt: doc.data().createdAt,
       ...doc.data(),
     }));
 

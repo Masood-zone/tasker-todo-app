@@ -16,9 +16,11 @@ export default async function TaskList() {
     );
   }
 
+  const sortedTodos = todos.sort((a, b) => b.createdAt - a.createdAt);
+
   return (
     <ul className="space-y-4">
-      {todos.map((todo) => (
+      {sortedTodos.map((todo) => (
         <TaskItem key={todo.id} todo={todo} />
       ))}
     </ul>

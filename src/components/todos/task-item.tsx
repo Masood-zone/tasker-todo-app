@@ -27,6 +27,12 @@ import {
   toggleTodoStatus,
   updateTodo,
 } from "@/app/actions/actions";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function TaskItem({ todo }: { todo: Todo }) {
   const [state, updateTodoAction, isUpdating] = useActionState(updateTodo, {
@@ -57,22 +63,36 @@ export default function TaskItem({ todo }: { todo: Todo }) {
   return (
     <li
       key={todo.id}
-      className={`p-5 w-full flex items-center space-x-2 relative group border rounded-xl ${
+      className={`w-full flex items-center space-x-2 relative group border rounded-xl h-32 overflow-hidden ${
         todo.completed
           ? "bg-primary dark:text-black text-white line-through"
           : ""
       }`}
     >
-      <Checkbox
-        checked={todo.completed}
-        onCheckedChange={() => handleToggleStatus(todo.id)}
-      />
-      <div className="flex-1 py-3">
+      <div className="h-full">
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Checkbox
+                checked={todo.completed}
+                onCheckedChange={() => handleToggleStatus(todo.id)}
+                className="w-8 h-full border-l-0 border-t-0 border-b-0 rounded-tr-none rounded-br-none border-gray-400"
+              />
+            </TooltipTrigger>
+            <TooltipContent>
+              <p>
+                Click to mark as {todo.completed ? "incomplete" : "complete"}
+              </p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+      </div>
+      <div className="flex-1 py-3 px-3">
         <h3 className="font-medium text-xl">{todo.task}</h3>
         <p className="text-base">{todo.description}</p>
         <div className="flex flex-wrap gap-2 mt-2">
-          <Badge variant={todo.priority.value}>
-            {todo.priority.priority_name} priority
+          <Badge variant={todo.priority?.value}>
+            {todo.priority?.priority_name} priority
           </Badge>
         </div>
       </div>
@@ -80,10 +100,12 @@ export default function TaskItem({ todo }: { todo: Todo }) {
         {/* Edit Dialog */}
         <Dialog>
           <DialogTrigger asChild>
-            <button>
+            <button className="">
               <Edit
                 size={20}
-                className={todo.completed ? "text-white" : "text-primary"}
+                className={
+                  todo.completed ? "text-white dark:text-black" : "text-primary"
+                }
               />
             </button>
           </DialogTrigger>
